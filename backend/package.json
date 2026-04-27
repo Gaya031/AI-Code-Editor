@@ -13,6 +13,8 @@
     "prisma": "prisma"
   },
   "dependencies": {
+    "@babel/parser": "^7.28.5",
+    "@babel/traverse": "^7.28.5",
     "@prisma/client": "^6.16.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",

@@ -15,8 +15,8 @@ export function errorMiddleware(error, _req, res, _next) {
     error: {
       message: isOperational ? error.message : 'Internal server error',
       statusCode,
-      details: env.NODE_ENV === 'development' ? error.message : undefined
+      details: error.details,
+      debug: env.NODE_ENV === 'development' && !isOperational ? error.message : undefined
     }
   });
 }
-

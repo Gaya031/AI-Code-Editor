@@ -16,12 +16,45 @@ model User {
 }
 
 model Project {
-  id     String @id @default(uuid())
-  name   String
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id         String        @id @default(uuid())
+  name       String
+  userId     String
+  user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  files      ProjectFile[]
+  codeChunks CodeChunk[]
 
   @@index([userId])
   @@map("projects")
 }
 
+model ProjectFile {
+  id        String  @id @default(uuid())
+  path      String
+  content   String
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, path])
+  @@index([projectId])
+  @@map("project_files")
+}
+
+model CodeChunk {
+  id         String  @id @default(uuid())
+  projectId  String
+  filePath   String
+  name       String
+  type       String
+  content    String
+  language   String
+  startLine  Int
+  endLine    Int
+  imports    String[]
+  exports    String[]
+  dependencies String[]
+  project    Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([projectId, filePath])
+  @@map("code_chunks")
+}

@@ -16,7 +16,7 @@ export function createApp() {
       credentials: true
     })
   );
-  app.use(express.json({ limit: '1mb' }));
+  app.use(express.json());
   app.use(morgan(env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
   app.use('/api', apiRouter);
@@ -26,4 +26,3 @@ export function createApp() {
 
   return app;
 }
-

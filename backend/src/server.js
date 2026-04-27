@@ -28,7 +28,7 @@ async function bootstrap() {
 
 bootstrap().catch((error) => {
   console.error('Failed to start backend');
-  console.error(error);
+  console.error(error.message);
   process.exit(1);
 });
 
